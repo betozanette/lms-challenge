@@ -3,22 +3,9 @@ const { sequelize, Ranking, Users } = require('./../../models');
 async function newRanking(model) {
   try {
     return await sequelize.transaction(async (transaction) => {
-      const alreadyRegistered = await Users.findOne({
-        where: { fullName: model.fullName },
-      });
-
-      const user = alreadyRegistered
-        ? alreadyRegistered
-        : await Users.create(
-            {
-              fullName: model.fullName,
-            },
-            { transaction },
-          );
-
       const isHaveRanking = await Ranking.findOne({
         where: {
-          idUser: user.id,
+          idUser: model.idUser,
         },
       });
 
@@ -34,7 +21,7 @@ async function newRanking(model) {
           : isHaveRanking
         : await Ranking.create(
             {
-              idUser: user.id,
+              idUser: model.idUser,
               score: model.score,
             },
             { transaction },
@@ -60,12 +47,14 @@ async function getRankingByID(id) {
 async function getRankingByScore() {
   try {
     return await Ranking.findAll({
+      include: [{ model: Users, as: 'Users' }],
       order: [
         ['score', 'DESC'],
         ['createdAt', 'ASC'],
       ],
     });
   } catch (e) {
+    console.log('e :', e);
     return Promise.reject(e);
   }
 }

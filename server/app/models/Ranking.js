@@ -40,7 +40,10 @@ module.exports = function (sequelize, DataTypes) {
   );
 
   Ranking.associate = (models) => {
-    Ranking.belongsTo(models.Users, { foreignKey: 'idUser', as: 'user' });
+    Ranking.belongsTo(models.Users, {
+      foreignKey: 'idUser',
+      as: 'Users',
+    });
   };
 
   return Ranking;
