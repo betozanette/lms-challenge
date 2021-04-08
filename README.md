@@ -1,6 +1,7 @@
-# lms-challenge
+# Ultra tiny LMS Challenge!
 
-#### run 🚀
+#### RUN 🚀
 ```cmd
+#from root folder
 docker-compose up -d
 ```
