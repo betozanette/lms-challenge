@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  db:
+    container_name: lms-db
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./lms-db:/var/lib/postgresql/data
+
+  api:
+    container_name: lms-api
+    build:
+      context: ./server
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "3333:3333"
+
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    links:
+      - api

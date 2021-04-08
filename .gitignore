@@ -19,3 +19,5 @@ client/yarn-debug.log*
 client/yarn-error.log*
 
 server/node_modules/
+
+lms-db
