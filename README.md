@@ -1,5 +1,8 @@
 # Ultra tiny LMS Challenge!
 
+#### INSTALL DOCKER 🐳
+https://docs.docker.com/compose/install/
+
 #### RUN 🚀
 ```cmd
 #from root folder
