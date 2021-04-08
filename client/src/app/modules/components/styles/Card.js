@@ -53,7 +53,7 @@ export const CardFieldset = styled.fieldset`
   padding: 0;
   margin: 0;
   border: 0;
-
+  ${(props) => props.center && 'display:flex;justify-content:center;'};
   & + & {
     margin-top: 24px;
   }
@@ -69,7 +69,7 @@ export const CardFieldset = styled.fieldset`
 
 export const CardInput = styled.input`
   padding: 7px 0;
-  width: 100%;
+  width: 250px;
   font-family: inherit;
   font-size: 18px;
   border-top: 0;
@@ -128,20 +128,21 @@ export const CardCheckboxOptions = styled.label`
 `;
 
 export const CardButton = styled.button`
-  display: block;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  width: 250px;
   padding: 12px 0;
   font-family: inherit;
   font-size: 14px;
   font-weight: 700;
   color: #fff;
-  background-color: #f55523;
+  background-color: ${(props) => (props.logout ? '#d4004b' : '#f55523')};
   border: 0;
   border-radius: 35px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.02, 0.01, 0.47, 1);
-
+  margin-top: ${(props) => (props.marginTop ? '20px' : '0px')};
   &:hover {
     box-shadow: 0 15px 15px rgba(0, 0, 0, 0.16);
     transform: translate(0, -5px);
@@ -175,12 +176,16 @@ export const CardList = styled.ul`
   transition: color 0.25s ease-in;
   margin: 4px;
   list-style-type: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `;
 
 export const CardListItem = styled.li`
   transition: color 0.25s ease-in;
   border-bottom: 1px solid rgb(245 85 35 / 40%);
   padding: 10px;
-  font-size: ${(props) => (props.first ? '28px' : '24px')};
+  font-size: ${(props) => (props.first ? '24px' : '18px')};
   font-weight: ${(props) => (props.bold ? 'bold' : props.first ? '300' : '200')};
+  color: #d4004b;
 `;

@@ -48,7 +48,7 @@ const Home = () => {
           <CardHeader>
             <FadeIn duration="0.4s" delay="0.2s">
               <CardHeading red big bold>
-                Hey there :)
+                Hey there 🧙🏼
               </CardHeading>
             </FadeIn>
             <FadeIn duration="0.4s" delay="0.8s">
@@ -60,7 +60,7 @@ const Home = () => {
           </CardHeader>
           <FadeIn duration="0.4s" delay="1.8s">
             <CardBody>
-              <CardFieldset>
+              <CardFieldset center>
                 <CardInput
                   placeholder="Username"
                   type="text"
@@ -70,19 +70,21 @@ const Home = () => {
                 />
               </CardFieldset>
               {username && username.length < 2 && (
-                <CardError>the name must be more than two digits</CardError>
+                <Container>
+                  <CardError>the name must be more than two digits</CardError>
+                </Container>
               )}
               {requestStarted ? (
                 <Container>
                   <Loader type="Circles" color="#00BFFF" height={80} width={80} />
                 </Container>
               ) : (
-                <CardFieldset>
+                <CardFieldset center>
                   <CardButton
                     type="submit"
                     disabled={username && username.length < 2}
                   >
-                    Submit
+                    Submit 🚀
                   </CardButton>
                 </CardFieldset>
               )}

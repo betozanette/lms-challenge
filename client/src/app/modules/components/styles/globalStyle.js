@@ -9,8 +9,7 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: 'Roboto', 'Segoe UI', 'Oxygen';
     -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #FFF;
+    -moz-osx-font-smoothing: grayscale;        
   }
   :root {
     font-size: ${px2vw(30)};

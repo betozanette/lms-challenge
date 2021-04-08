@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { newRanking } from '../../redux/slice/ranking';
 import Loader from 'react-loader-spinner';
+import { toast } from 'react-toastify';
 import { Container } from '../components/styles/Container';
 import {
   CardWrapper,
@@ -47,6 +48,14 @@ const values = [
   },
 ];
 
+const configToasty = {
+  position: 'top-right',
+  autoClose: 3000,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+};
+
 const Question = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -54,6 +63,41 @@ const Question = () => {
   const { ranking, requestStarted } = useSelector((state) => state.ranking);
 
   const [valuesSelected, setValuesSelected] = useState([]);
+  const [finalScore, setFinalScore] = useState(0);
+
+  const notify = () => {
+    switch (finalScore) {
+      case 0:
+        toast.error(`You can try again ❤️! score: ${finalScore}`, configToasty);
+        break;
+
+      case 25:
+        toast.warning(
+          `You need to study more 📚! your score: ${finalScore}`,
+          configToasty,
+        );
+        break;
+      case 50:
+        toast.warning(
+          `You can do better 💪! your score: ${finalScore}`,
+          configToasty,
+        );
+        break;
+
+      case 75:
+        toast.info(`Almost perfect 👏🏻! your score: ${finalScore}`, configToasty);
+        break;
+
+      case 100:
+        toast.success(
+          `Congratulations 😎🥳! your score: ${finalScore}`,
+          configToasty,
+        );
+        break;
+      default:
+        break;
+    }
+  };
 
   useEffect(() => {
     if (!user) {
@@ -63,7 +107,11 @@ const Question = () => {
 
   useEffect(() => {
     if (ranking) {
-      history.push('/ranking');
+      notify();
+      setTimeout(() => {
+        history.push('/ranking');
+        setFinalScore(null);
+      }, 3000);
     }
   }, [history, ranking]);
 
@@ -77,7 +125,7 @@ const Question = () => {
       idUser: user.id,
       score,
     };
-
+    setFinalScore(score);
     dispatch(newRanking(model));
   };
 
@@ -107,9 +155,9 @@ const Question = () => {
           <CardHeader>
             <FadeIn duration="0.4s" delay="0.2s">
               <CardHeading small>
-                What a beautiful name you have{' '}
+                What a beautiful name you have
                 <CardHeading red big bold>
-                  {user && user.fullName}!
+                  {user && user.fullName}!🤩
                 </CardHeading>
               </CardHeading>
             </FadeIn>
@@ -153,9 +201,14 @@ const Question = () => {
                     <Loader type="Circles" color="#00BFFF" height={80} width={80} />
                   </Container>
                 ) : (
-                  <CardButton type="submit" disabled={valuesSelected.length === 0}>
-                    Submit
-                  </CardButton>
+                  <CardFieldset center>
+                    <CardButton
+                      type="submit"
+                      disabled={valuesSelected.length === 0}
+                    >
+                      Submit 🚀
+                    </CardButton>
+                  </CardFieldset>
                 )}
               </CardFieldset>
               <CardFieldset>
