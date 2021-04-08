@@ -5,5 +5,5 @@
 #from root folder
 docker-compose up -d
 ```
-#### AFTER RUN VISIT
+#### AFTER RUN GO
 http://localhost:3000
