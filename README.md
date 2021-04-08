@@ -1,6 +1,8 @@
-# lms-challenge
+# Ultra tiny LMS Challenge!
 
-#### run 🚀
+#### RUN 🚀
 ```cmd
-docker-compose up --force-recreate -d
+#from root folder
+docker-compose up -d
 ```
+http://localhost:3000
