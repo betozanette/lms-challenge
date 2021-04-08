@@ -54,7 +54,6 @@ async function getRankingByScore() {
       ],
     });
   } catch (e) {
-    console.log('e :', e);
     return Promise.reject(e);
   }
 }
